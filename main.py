@@ -17,9 +17,7 @@ def take_pic():
     neo.fill_strip(255, 255, 255) #sets color to pure white
     neo.update_strip()  #sends command
     cam = Camera()
-    cam.start_preview()
     cam.take_photo(filename)
-    cam.stop_preview()
     neo.fill_strip(0, 0, 0) #sets LED's to black
 
 take_pic()

@@ -14,5 +14,5 @@ neo.fill_strip(255, 255, 255)
 neo.update_strip()  # commit/send to LEDs
 cam = Camera()
 cam.start_preview()
-# Keep the preview window open for 5 seconds
-sleep(5)
+# Keep the preview window open for
+sleep(10)

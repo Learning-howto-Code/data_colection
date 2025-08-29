@@ -2,13 +2,9 @@ from picamzero import Camera
 from time import sleep
 from pi5neo import Pi5Neo
 import sys
-import spidev
 
 SPI_DEVICE = '/dev/spidev0.0' # Rpi protocol to get the timing right for the GPIOs
 SPI_SPEED_KHZ = 800 #speed of SPI protocol
-
-spi = spidev.SpiDev() #opens spi procces
-spi.open(0, 0)
 
 pin = 30
 neo = Pi5Neo(SPI_DEVICE, pin, SPI_SPEED_KHZ)
@@ -22,7 +18,5 @@ def take_pic():
     cam.take_photo("img.jpg")
     cam.stop_preview()
     neo.fill_strip(0, 0, 0) #sets LED's to black
-    spi.close() #closes spi procces
-    
-    
+
 take_pic()

@@ -6,13 +6,18 @@ import sys
 SPI_DEVICE = '/dev/spidev0.0' # Rpi protocol to get the timing right for the GPIOs
 SPI_SPEED_KHZ = 800 #speed of SPI protocol
 
-neo = Pi5Neo(SPI_DEVICE, 30, SPI_SPEED_KHZ)
+pin = 30
+neo = Pi5Neo(SPI_DEVICE, pin, SPI_SPEED_KHZ)
 
-# Fill the strip with white (R,G,B = 255,255,255)
+def take_pic():
 
-neo.fill_strip(255, 255, 255)
-neo.update_strip()  # commit/send to LEDs
-cam = Camera()
-cam.start_preview()
-# Keep the preview window open for
-sleep(10)
+    neo.fill_strip(255, 255, 255) #sets color to pure white
+    neo.update_strip()  #sends command
+    cam = Camera()
+    cam.start_preview()
+    cam.capture_file("img.jpg")
+    cam.stop_preview()
+    neo.fill_strip(0, 0, 0) #sets LED's to black
+    neo.close#hopefully closes the spi bus
+    
+take_pic()

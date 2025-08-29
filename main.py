@@ -15,7 +15,7 @@ def take_pic():
     neo.update_strip()  #sends command
     cam = Camera()
     cam.start_preview()
-    cam.capture_file("img.jpg")
+    cam.take_photo("img.jpg")
     cam.stop_preview()
     neo.fill_strip(0, 0, 0) #sets LED's to black
     neo.close#hopefully closes the spi bus

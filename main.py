@@ -18,16 +18,16 @@ def take_pic():
     neo.update_strip()
     print("light on")
     picam2 = Picamera2()
-    config = picam2.create_still_configuration()
+    config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
     picam2.configure(config)
     picam2.start()
     print("activated cam")
-    picam2.wait_for_capture() #waits for cam to calibrate
+    sleep(2)
     print("waited 1 sec")
-    picam2.capture_file("test.jpg") 
+    picam2.capture_file("test.jpg")
     print("took pic")
-    picam2.close()
-    del picam2 #stops worker funtion
+    # picam2.close()
+    # del picam2 #stops worker funtion
     print("stopped cam")
     neo.fill_strip(0, 0, 0)
     neo.update_strip()

@@ -31,7 +31,7 @@ def take_pic():
             picam2.capture_file(filename)
             print("took pic")
             sleep(.2)
-    
+
     finally:
         picam2.close()
         del picam2 #stops worker funtion

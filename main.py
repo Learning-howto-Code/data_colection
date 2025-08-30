@@ -18,6 +18,8 @@ def take_pic():
     neo.update_strip()
     print("light on")
     picam2 = Picamera2()
+    config = picam2.create_still_configuration()
+    picam2.configure(config)
     print("activated cam")
     sleep(1)  #waits for cam to calibrate
     print("waited 1 sec")

@@ -20,8 +20,9 @@ def take_pic():
     picam2 = Picamera2()
     config = picam2.create_still_configuration()
     picam2.configure(config)
+    picam2.start()
     print("activated cam")
-    sleep(1)  #waits for cam to calibrate
+    picam2.wait_for_capture() #waits for cam to calibrate
     print("waited 1 sec")
     picam2.capture_file("test.jpg") 
     print("took pic")

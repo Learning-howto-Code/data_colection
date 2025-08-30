@@ -1,5 +1,5 @@
 from pi5neo import Pi5Neo
-import time
+from time import sleep
 import sys
 
 
@@ -11,6 +11,9 @@ neo = Pi5Neo(SPI_DEVICE, 30, SPI_SPEED_KHZ)
 # Fill the strip with white (R,G,B = 255,255,255)
 neo.fill_strip(255, 255, 255)
 neo.update_strip()  # commit/send to LEDs
+sleep(5)
+neo.fill_strip(0, 0, 0)
+neo.update_strip() 
 
 
 

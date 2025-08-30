@@ -21,7 +21,7 @@ def take_pic():
     print("activated cam")
     sleep(1)  #waits for cam to calibrate
     print("waited 1 sec")
-    picam2.capture_file(filename) 
+    picam2.capture_file("test.jpg") 
     print("took pic")
     picam2.close()
     del picam2 #stops worker funtion

@@ -14,24 +14,13 @@ pin = 30
 neo = Pi5Neo(SPI_DEVICE, pin, SPI_SPEED_KHZ)
 
 def take_pic():
-    # Generate timestamped filename
-    filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S')}.jpg"
-
-    # Turn LEDs white
-    neo.fill_strip(200, 200, 200)
+    filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S')}.jpg" #names pic as timestamp
+    neo.fill_strip(200, 200, 200) #sets LED's to white and a little dimmer
     neo.update_strip()
-
-    # Initialize Picamera2
     picam2 = Picamera2()
-    picam2.start_preview()          # optional, shows preview if running desktop
-    sleep(1)                        # allow camera to adjust exposure/white balance
-
-    picam2.capture_file(filename)   # capture image
-
-    picam2.stop_preview()           # stop preview
-    del picam2                      # release camera
-
-    # Turn LEDs off
+    sleep(1)  #waits for cam to calibrate
+    picam2.capture_file(filename) 
+    del picam2 #stops worker funtion
     neo.fill_strip(0, 0, 0)
     neo.update_strip()
 

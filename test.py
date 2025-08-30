@@ -11,9 +11,6 @@ neo = Pi5Neo(SPI_DEVICE, 30, SPI_SPEED_KHZ)
 # Fill the strip with white (R,G,B = 255,255,255)
 neo.fill_strip(255, 255, 255)
 neo.update_strip()  # commit/send to LEDs
-sleep(60)
-neo.fill_strip(0, 0, 0)
-neo.update_strip() 
 
 from picamera2 import Picamera2
 
@@ -30,5 +27,6 @@ picam2.start(show_preview=True)
 input("Press Enter to stop preview...")
 
 picam2.stop()
-
+neo.fill_strip(0, 0, 0)
+neo.update_strip() 
 

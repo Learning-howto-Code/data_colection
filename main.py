@@ -16,11 +16,11 @@ def take_pic():
     filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S')}.jpg" #names pic as timestamp
     neo.fill_strip(200, 200, 200) #sets LED's to white and a little dimmer
     neo.update_strip()
-    # picam2 = Picamera2()
+    picam2 = Picamera2()
     sleep(1)  #waits for cam to calibrate
-    # picam2.capture_file(filename) 
-    # picam2.close()
-    # del picam2 #stops worker funtion
+    picam2.capture_file(filename) 
+    picam2.close()
+    del picam2 #stops worker funtion
     neo.fill_strip(0, 0, 0)
     neo.update_strip()
 

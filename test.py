@@ -5,7 +5,6 @@ import os
 
 # Image folder
 img_folder = "/home/jake/Downloads/data_collection/images"
-os.makedirs(img_folder, exist_ok=True)  # make sure folder exists
 
 # SPI setup for NeoPixel
 SPI_DEVICE = '/dev/spidev0.0'

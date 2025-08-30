@@ -19,6 +19,7 @@ def take_pic():
     picam2 = Picamera2()
     sleep(1)  #waits for cam to calibrate
     picam2.capture_file(filename) 
+    picam2.close()
     del picam2 #stops worker funtion
     neo.fill_strip(0, 0, 0)
     neo.update_strip()

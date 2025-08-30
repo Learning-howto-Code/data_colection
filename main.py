@@ -14,7 +14,7 @@ neo = Pi5Neo(SPI_DEVICE, pin, SPI_SPEED_KHZ)
 
 def take_pic():
     
-    neo.fill_strip(200, 200, 200) #sets LED's to white and a little dimmer
+    neo.fill_strip(100, 100, 100) #sets LED's to white and a little dimmer
     neo.update_strip()
     print("light on")
     picam2 = Picamera2()

@@ -13,7 +13,7 @@ pin = 30
 neo = Pi5Neo(SPI_DEVICE, pin, SPI_SPEED_KHZ)
 
 def take_pic():
-    filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S')}.jpg" #names pic as timestamp
+    
     neo.fill_strip(200, 200, 200) #sets LED's to white and a little dimmer
     neo.update_strip()
     print("light on")
@@ -23,14 +23,21 @@ def take_pic():
     picam2.start()
     print("activated cam")
     sleep(2)
-    print("waited 1 sec")
-    picam2.capture_file("test.jpg")
-    print("took pic")
-    # picam2.close()
-    # del picam2 #stops worker funtion
-    print("stopped cam")
-    neo.fill_strip(0, 0, 0)
-    neo.update_strip()
-    print("turned off light")
+    print("waited 2 sec")
+
+    try:
+        while True:
+            filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S_%f')}.jpg"   #names pic as timestamp
+            picam2.capture_file(filename)
+            print("took pic")
+            sleep(.2)
+    
+    finally:
+        picam2.close()
+        del picam2 #stops worker funtion
+        print("stopped cam")
+        neo.fill_strip(0, 0, 0)
+        neo.update_strip()
+        print("turned off light")
 
 take_pic()

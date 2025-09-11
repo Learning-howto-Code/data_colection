@@ -26,11 +26,11 @@ def take_pic():
     print("waited 2 sec") #cam is now ready
 
     start_time = time() 
-    while time() - start_time < 30: # only takes iamges for 30 seconds
+    while time() - start_time < 20: # only takes iamges for 30 seconds
         filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S_%f')}.jpg"   #names pic as timestamp
         picam2.capture_file(filename)
         print("took pic")
-        sleep(.2)
+        sleep(.1)
 
    
 

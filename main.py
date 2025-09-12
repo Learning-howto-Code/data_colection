@@ -2,6 +2,7 @@ from picamera2 import Picamera2
 from time import sleep, strftime, time
 from pi5neo import Pi5Neo
 import os
+import cv2
 
 # Image folder
 img_folder = "/home/jake/Downloads/data_collection/images"
@@ -26,11 +27,16 @@ def take_pic():
     print("waited 2 sec") #cam is now ready
 
     start_time = time() 
-    while time() - start_time < 20: # only takes iamges for 30 seconds
-        filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S_%f')}.jpg"   #names pic as timestamp
-        picam2.capture_file(filename)
-        print("took pic")
-        sleep(.1)
+    while time() - start_time < 20:  #takes images for 20 seconds
+        frame = picam2.capture_array()  #uses capture array funtion instead
+        frame_count += 1
+
+        
+        filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S')}_{frame_count}.jpg"
+        cv2.imwrite(filename, frame)
+
+    print("Captured", frame_count, "frames in", round(time()-start_time, 2), "seconds")
+
 
    
 

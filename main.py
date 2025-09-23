@@ -5,7 +5,7 @@ import os
 import cv2
 
 # Image folder
-img_folder = "/home/jake/Downloads/data_collection/images"
+img_folder = "/home/jake/Downloads/data_collection/images/no_water"
 
 # SPI setup for NeoPixel
 SPI_DEVICE = '/dev/spidev0.0'
@@ -25,7 +25,8 @@ def take_pic():
     print("activated cam")
     sleep(2)    #watis for cam to start
     print("waited 2 sec") #cam is now ready
-
+	
+    frame_count=0
     start_time = time() 
     while time() - start_time < 20:  #takes images for 20 seconds
         frame = picam2.capture_array()  #uses capture array funtion instead

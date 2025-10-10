@@ -5,7 +5,7 @@ import os
 import cv2
 
 # Image folder
-img_folder = "/home/jake/Downloads/data_collection/images/no_water"
+img_folder = "/home/jake/Downloads/data_collection/water_start_end/bathroom_sink"
 
 # SPI setup for NeoPixel
 SPI_DEVICE = '/dev/spidev0.0'
@@ -14,7 +14,6 @@ pin = 30
 neo = Pi5Neo(SPI_DEVICE, pin, SPI_SPEED_KHZ)
  
 def take_pic():
-    
     neo.fill_strip(10, 10, 10) #sets LED's to white and a little dimmer
     neo.update_strip() #sets color
     print("light on")
@@ -25,10 +24,10 @@ def take_pic():
     print("activated cam")
     sleep(2)    #watis for cam to start
     print("waited 2 sec") #cam is now ready
-	
+    sleep(35)#waits for water to get there
     frame_count=0
     start_time = time() 
-    while time() - start_time < 20:  #takes images for 20 seconds
+    while time() - start_time < 5:  #takes images for 20 seconds
         frame = picam2.capture_array()  #uses capture array funtion instead
         frame_count += 1
 

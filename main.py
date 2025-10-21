@@ -5,7 +5,7 @@ import os
 import cv2
 
 # Image folder
-img_folder = "/home/jake/Downloads/data_collection/water_start_end/bathroom_sink"
+img_folder = "/home/jake/Downloads/data_collection/water_start_end/toilet"
 
 # SPI setup for NeoPixel
 SPI_DEVICE = '/dev/spidev0.0'
@@ -24,7 +24,7 @@ def take_pic():
     print("activated cam")
     sleep(2)    #watis for cam to start
     print("waited 2 sec") #cam is now ready
-    sleep(35)#waits for water to get there
+    sleep(15)#waits for water to get there
     frame_count=0
     start_time = time() 
     while time() - start_time < 5:  #takes images for 20 seconds

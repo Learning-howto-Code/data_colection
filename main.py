@@ -24,13 +24,12 @@ def take_pic():
     print("activated cam")
     sleep(2)    #watis for cam to start
     print("waited 2 sec") #cam is now ready
-    sleep(15)#waits for water to get there
     frame_count=0
     start_time = time() 
-    while time() - start_time < 5:  #takes images for 20 seconds
+    while time() - start_time < 600:  #takes images for 20 seconds
         frame = picam2.capture_array()  #uses capture array funtion instead
         frame_count += 1
-
+#
         
         filename = f"{img_folder}/img_{strftime('%Y%m%d_%H%M%S')}_{frame_count}.jpg"
         cv2.imwrite(filename, frame)

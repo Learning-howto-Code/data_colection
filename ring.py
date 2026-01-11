@@ -3,7 +3,7 @@ from time import sleep
 import sys
 
 
-SPI_DEVICE = '/dev/spidev0.0' # Rpi protocol to get the timing right for the GPIOs
+SPI_DEVICE = '/dev/spidev10.0' # Rpi protocol to get the timing right for the GPIOs
 SPI_SPEED_KHZ = 800 #speed of SPI protocol
 
 neo = Pi5Neo(SPI_DEVICE, 30, SPI_SPEED_KHZ)

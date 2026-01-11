@@ -1,72 +1,19 @@
-import argparse
+import imageio.v3 as iio
 from pathlib import Path
-import sys
-import cv2
 
-#!/usr/bin/env python3
-"""
-extract_frames.py
-
-Split a video (mp4 or other) into individual image frames.
-
-Usage:
-    python extract_frames.py --input video.mp4 --output frames_dir --format png --start 0 --step 1
-
-Requires: opencv-python
-    pip install opencv-python
-"""
-
-try:
-except Exception as e:
-    print("Error: OpenCV (cv2) is required. Install with: pip install opencv-python", file=sys.stderr)
-    raise e
-
-def extract_frames(input_path: Path, output_dir: Path, img_format: str = "png",
-                   start: int = 0, step: int = 1, pad: int = 6):
-    cap = cv2.VideoCapture(str(input_path))
-    if not cap.isOpened():
-        raise RuntimeError(f"Cannot open video: {input_path}")
-
+def extract_frames(input_path: Path, output_dir: Path, img_format="png", start=0, step=1, pad=6):
     output_dir.mkdir(parents=True, exist_ok=True)
-    total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) if cap.get(cv2.CAP_PROP_FRAME_COUNT) > 0 else None
-    idx = 0
+    reader = iio.imiter(input_path)
     written = 0
 
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
-        if idx >= start and ((idx - start) % step == 0):
-            name = f"frame_{written:0{pad}d}.{img_format.lstrip('.')}"
-            out_path = output_dir / name
-            # cv2.imwrite handles PNG/JPG/BMP etc.
-            if not cv2.imwrite(str(out_path), frame):
-                raise RuntimeError(f"Failed to write frame to {out_path}")
-            written += 1
-        idx += 1
+    for idx, frame in enumerate(reader):
+        if idx < start or (idx - start) % step != 0:
+            continue
+        frame_path = output_dir / f"frame_{written:0{pad}d}.{img_format}"
+        iio.imwrite(frame_path, frame)
+        written += 1
 
-    cap.release()
-    return written, total
+    return written, idx + 1
 
-def main():
-    p = argparse.ArgumentParser(description="Extract frames from a video file.")
-    p.add_argument("--input", "-i", required=True, type=Path, help="Input video file (e.g. video.mp4)")
-    p.add_argument("--output", "-o", required=True, type=Path, help="Output directory for frames")
-    p.add_argument("--format", "-f", default="png", choices=["png", "jpg", "jpeg", "bmp"], help="Image format")
-    p.add_argument("--start", type=int, default=0, help="Start frame index (default: 0)")
-    p.add_argument("--step", type=int, default=1, help="Save every Nth frame (default: 1)")
-    p.add_argument("--pad", type=int, default=6, help="Zero-pad filenames to this width")
-    args = p.parse_args()
-
-    if not args.input.exists():
-        print(f"Input file not found: {args.input}", file=sys.stderr)
-        sys.exit(2)
-
-    written, total = extract_frames(args.input, args.output, args.format, args.start, args.step, args.pad)
-    if total is None:
-        print(f"Wrote {written} frames to {args.output}")
-    else:
-        print(f"Wrote {written} frames to {args.output} (from {total} total frames)")
-
-if __name__ == "__main__":
-    main()
+# Example usage:
+#   python3 /Users/jakehopkins/Downloads/data_colection/split_frames -i /Users/jakehopkins/Downloads/IMG_0228.MOV -o /Users/jakehopkins/Downloads/still_images

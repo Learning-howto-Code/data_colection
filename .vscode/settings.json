@@ -8,7 +8,7 @@
     "python.analysis.extraPaths": [
         "",
         "/Users/jakehopkins/.vscode/extensions/joedevivo.vscode-circuitpython-0.2.0-darwin-x64/stubs",
-        "/Users/jakehopkins/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20251031/adafruit-circuitpython-bundle-py-20251031/lib"
+        "/Users/jakehopkins/Library/Application Support/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20260108/adafruit-circuitpython-bundle-py-20260108/lib"
     ],
     "circuitpython.board.version": null,
     "idf.pythonInstallPath": "/usr/bin/python"

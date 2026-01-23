@@ -3,7 +3,7 @@ from time import sleep
 import sys
 
 
-SPI_DEVICE = '/dev/spidev10.0' # Rpi protocol to get the timing right for the GPIOs
+SPI_DEVICE = '/dev/spidev0.1' # Rpi protocol to get the timing right for the GPIOs
 SPI_SPEED_KHZ = 800 #speed of SPI protocol
 
 neo = Pi5Neo(SPI_DEVICE, 30, SPI_SPEED_KHZ)
@@ -11,7 +11,7 @@ neo = Pi5Neo(SPI_DEVICE, 30, SPI_SPEED_KHZ)
 # Fill the strip with white (R,G,B = 255,255,255)
 neo.fill_strip(255, 255, 255)
 neo.update_strip()  # commit/send to LEDs
-sleep(1)
+sleep(10)
 neo.fill_strip(0, 0, 0)
 neo.update_strip() 
 

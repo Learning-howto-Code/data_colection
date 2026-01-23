@@ -5,7 +5,7 @@ import os
 import cv2
 
 # Image folder
-img_folder = "/home/jake/Downloads/data_collection/water_start_end/toilet"
+img_folder = "/home/jake/Downloads/data_collection/water_start_end/shower"
 
 # SPI setup for NeoPixel
 SPI_DEVICE = '/dev/spidev0.0'

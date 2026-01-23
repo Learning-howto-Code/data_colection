@@ -13,7 +13,7 @@ neo.set_brightness(50) #~20% brightness
 
 neo.fill_strip(255, 255, 255)
 neo.update_strip()  # commit/send to LEDs
-sleep(1)
+sleep(10)
 neo.fill_strip(0, 0, 0)
 neo.update_strip() 
 

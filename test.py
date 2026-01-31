@@ -5,7 +5,7 @@ from picamzero import Camera
 cam = Camera()
 cam.start_preview()
 
-neo = Pi5Neo('/dev/spidev0.0', 30, 250)
+neo = Pi5Neo('/dev/spidev0.0', 24, 800)
 
 neo.fill_strip(255, 255, 255)
 neo.update_strip()
